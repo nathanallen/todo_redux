@@ -1,3 +1,5 @@
 require_relative 'config/application'
-
-puts "Put your application code in #{File.expand_path(__FILE__)}"
+require_relative 'app/models/task.rb'
+require_relative 'app/controllers/view.rb'
+require_relative 'app/controllers/input.rb'
+require_relative 'app/controllers/list_processing.rb'
