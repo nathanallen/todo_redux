@@ -1,4 +1,5 @@
-class Task < ActiveRecord::Base
+require_relative '../../config/application'
 
+class Task < ActiveRecord::Base
 
 end
