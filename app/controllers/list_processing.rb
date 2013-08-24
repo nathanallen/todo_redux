@@ -7,20 +7,25 @@ class ListProcessor
     end
   end
 
- def self.complete_task(id)
+  def self.complete_task(id)
     Task.where(list_index: id).each do |task|
       task.status = 'complete'
       task.completed_at = Time.now
       task.save!
     end
-
-    # if completed
-    #   puts "Completed task \##{list_index}!"
-    # else
-    #   puts "Could not locate task \##{list_index}."
-    # end
-    # puts ""
-    ViewController.print_list
   end
 
+  def self.add_task_to_list(name)
+    Task.create!(name: name)
+  end
+
+  def self.delete_task(id)
+    Task.where(list_index: id).destroy_all
+  end
 end
+
+# ListProcessor.add_task_to_list(argv[1])
+#     elsif argv[0] == "complete"
+#       ListProcessor.complete_task(argv[1].to_i)
+#     elsif argv[0] == "delete"
+#       ListProcessor.delete_task(argv[1].to_i)

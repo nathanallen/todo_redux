@@ -4,6 +4,7 @@ class ViewController
 
   def initialize
     Input.evaluate_input(ARGV)
+    ViewController.print_list
   end
 
   def self.print_list
@@ -23,12 +24,22 @@ class ViewController
     puts ""
   end
 
-  def print_outstanding_items
+  def self.print_outstanding_items
+    puts "Here are your outstanding items:".upcase
+
+    Task.where(status: "incomplete").each do |task|
+      print " " if task.list_index.to_i < 10
+      puts "#{task.list_index}. [ ] #{task.name}"
+    end
+    puts ""
+  end
+
+  def self.print_completed_items
     puts "Here are your completed items:".upcase
 
     Task.where(status: "complete").each do |task|
-      print " " if task.id.to_i < 10
-      puts "#{task.id}. [X] #{task.name}"
+      print " " if task.list_index.to_i < 10
+      puts "#{task.list_index}. [X] #{task.name}"
     end
     puts ""
   end
